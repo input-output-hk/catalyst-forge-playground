@@ -10,6 +10,6 @@ permissions:
 # temp
 jobs:
   ci:
-    uses: input-output-hk/catalyst-forge/.github/workflows/ci.yml@fix-public
+    uses: input-output-hk/catalyst-forge/.github/workflows/ci.yml@master
     with:
       forge_version: latest
