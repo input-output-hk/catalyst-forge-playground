@@ -1,0 +1,65 @@
+VERSION 0.8
+
+IMPORT github.com/earthly/lib/rust:3.0.3 AS rust
+
+deps:
+  FROM rust:1.81
+
+  WORKDIR /work
+
+  COPY Cargo.lock Cargo.toml .
+  COPY cross.sh .
+
+  DO rust+INIT
+
+src:
+  FROM +deps
+
+  COPY --keep-ts --dir src .
+
+build:
+  FROM +src
+
+  ARG OS
+  ARG ARCH
+  ARG TARGET=$(./cross.sh ${OS}/${ARCH})
+
+  DO rust+CROSS --target ${TARGET}
+  DO rust+COPY_OUTPUT --output=".*?/release/[^\./]+"
+
+  SAVE ARTIFACT ./target/${TARGET}/release/hello hello
+
+release:
+  FROM scratch
+
+  ARG TARGETOS
+  ARG TARGETARCH
+  ARG USERPLATFORM
+
+  COPY \
+      --platform=$USERPLATFORM \
+      (+build/hello \
+      --OS=$TARGETOS \
+      --ARCH=$TARGETARCH) bin/hello
+
+  SAVE ARTIFACT bin/hello hello
+
+publish:
+  FROM debian:bookworm-slim
+  WORKDIR /workspace
+
+  ARG container="rust"
+  ARG tag="latest"
+
+  ARG TARGETOS
+  ARG TARGETARCH
+  ARG USERPLATFORM
+
+  COPY \
+      --platform=$USERPLATFORM \
+      (+build/hello \
+      --OS=$TARGETOS \
+      --ARCH=$TARGETARCH) /usr/local/bin/hello
+
+  ENTRYPOINT ["/usr/local/bin/hello"]
+  SAVE IMAGE ${container}:${tag}
