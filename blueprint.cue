@@ -12,6 +12,10 @@ global: ci: {
 	]
 	providers: github: registry: "ghcr.io"
 	tagging: {
+		aliases: {
+			"go":   "examples/go"
+			"rust": "examples/rust"
+		}
 		strategy: "commit"
 	}
 }
