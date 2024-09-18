@@ -20,8 +20,11 @@ src:
 build:
   FROM +src
 
-  ARG OS
-  ARG ARCH
+  ARG USEROS
+  ARG USERARCH
+
+  ARG OS=$USEROS
+  ARG ARCH=$USERARCH
   ARG TARGET=$(./cross.sh ${OS}/${ARCH})
 
   DO rust+CROSS --target ${TARGET}
