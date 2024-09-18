@@ -10,7 +10,7 @@ global: ci: {
 	registries: [
 		"ghcr.io/input-output-hk/catalyst-forge-playground",
 	]
-	provider: github: registry: "ghcr.io"
+	providers: github: registry: "ghcr.io"
 	tagging: {
 		strategy: "commit"
 	}
