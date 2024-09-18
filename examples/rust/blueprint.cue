@@ -2,6 +2,9 @@ version: "1.0.0"
 project: {
 	name: "rust"
 	ci: targets: {
+		build: {
+			privileged: true
+		}
 		release: {
 			platforms: [
 				"linux/amd64",
