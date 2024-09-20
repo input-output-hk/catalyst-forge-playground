@@ -1,2 +1,7 @@
 # Rust
 target/
+
+# Python
+dist/
+__pycache__/
+*.pyc
