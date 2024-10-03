@@ -11,6 +11,6 @@ permissions:
   packages: write
 jobs:
   ci:
-    uses: input-output-hk/catalyst-forge/.github/workflows/ci.yml@master
+    uses: input-output-hk/catalyst-forge/.github/workflows/ci.yml@ci/v1.1.0
     with:
       forge_version: latest
