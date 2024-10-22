@@ -45,7 +45,7 @@ test:
     RUN uv sync --frozen --extra dev
     RUN uv run pytest .
 
-publish:
+docker:
     FROM python:3.12-slim
 
 	ARG container=hello
@@ -60,7 +60,7 @@ publish:
     ENTRYPOINT ["hello"]
 	SAVE IMAGE ${container}:${tag}
 
-release:
+github:
     FROM scratch
 
     COPY +build/dist dist

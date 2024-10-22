@@ -32,7 +32,7 @@ build:
 
   SAVE ARTIFACT ./target/${TARGET}/release/hello hello
 
-release:
+github:
   FROM scratch
 
   ARG TARGETOS
@@ -47,7 +47,7 @@ release:
 
   SAVE ARTIFACT bin/hello hello
 
-publish:
+docker:
   FROM debian:bookworm-slim
   WORKDIR /workspace
 

@@ -43,7 +43,7 @@ test:
 
     RUN go test ./...
 
-release:
+github:
     FROM scratch
 
     ARG version="v0.0.0"
@@ -61,7 +61,7 @@ release:
 
     SAVE ARTIFACT bin/hello hello
 
-publish:
+docker:
     FROM debian:bookworm-slim
     WORKDIR /workspace
 
