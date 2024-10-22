@@ -5,14 +5,14 @@ project: {
 		build: {
 			privileged: true
 		}
-		release: {
+		docker: {
 			platforms: [
 				"linux/amd64",
 				"linux/arm64",
 			]
 			privileged: true
 		}
-		publish: {
+		github: {
 			platforms: [
 				"linux/amd64",
 				"linux/arm64",

@@ -2,7 +2,7 @@ version: "1.0.0"
 project: {
 	name: "go"
 	ci: targets: {
-		publish: {
+		docker: {
 			args: {
 				version: string | *"v0.0.0" @env(name="GIT_TAG_VERSION",type="string")
 			}
@@ -11,7 +11,7 @@ project: {
 				"linux/arm64",
 			]
 		}
-		release: {
+		github: {
 			args: {
 				version: string | *"v0.0.0" @env(name="GIT_TAG_VERSION",type="string")
 			}
